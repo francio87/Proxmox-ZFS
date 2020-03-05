@@ -99,11 +99,9 @@ Dovremmo attivare la macchina, ottenendo una licenza ecc ecc... altrimenti non a
 
 Dopo aver attivato la licenza di Proxmox, aggiornare il sistema:
 
->PVE > Updates
+>PVE > Updates > Refresh > Upgrade
 
->Fare click su Refresh e poi Upgrade
-
-Verrà aperta una shell, sulla quale è necessario premere Y per effettuare l'aggiornamento.
+Verrà aperta una shell, sulla quale è necessario immettere Y per procedere all'aggiornamento
 
 >In alternativa da terminale :
 
