@@ -85,3 +85,39 @@ Effettuare l'accesso come **root** utilizzando la password impostata precedentem
 
     dav@davidef ~ >> ssh root@192.168.5.29
     Linux pve 5.3.10-1-pve #1 SMP PVE 5.3.10-1 (Thu, 14 Nov 2019 10:43:13 +0100) x86_64
+
+
+# Attivazione ?
+
+Dovremmo attivare la macchina, ottenendo una licenza ecc ecc... altrimenti non avremmo accesso ai repo stabili... Eventualmente se vogliamo usare i community posso integrare con i step da effettuare per abilitare i repo community.
+
+>PVE > Subscription > Upload Key
+
+![Attivazione chiave](img/pve-sub-key.png)
+
+## Aggiornamento Proxmox
+
+Dopo aver attivato la licenza di Proxmox, aggiornare il sistema:
+
+>PVE > Updates
+
+>Fare click su Refresh e poi Upgrade
+
+Verrà aperta una shell, sulla quale è necessario premere Y per effettuare l'aggiornamento.
+
+>In alternativa da terminale :
+
+    # apt-get update
+    # apt-get dist-upgrade
+
+
+# Creazione VM
+
+E' possbile utilizzare la WebUI per la creazione della VM
+
+Fare clik su **Create VM** in alto a destra ed inserire i parametri nella schermata
+
+    Inserire VM ID: 200
+    Inserire Name: vm-nethservice
+
+![Crea VM Step 1](img/pve-crea-vm-1.png)
