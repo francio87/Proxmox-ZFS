@@ -109,13 +109,86 @@ Verrà aperta una shell, sulla quale è necessario immettere Y per procedere all
     # apt-get dist-upgrade
 
 
+# Caricare ISO NethServer
+
+Carichiamo la ISO di NethServer all'interno di Proxmox
+
+>PVE > local (pve) > Content
+
+Facciamo click su **Upload**
+
+![Click Upload](img/pve-load-iso-1.png)
+
+Facciamo click su **Select File...** e cerchiamo il file ISO precedentemente Scaricato
+
+![Select File](img/pve-load-iso-2.png) ![Upload ISO](img/pve-load-iso-4.png)
+
+Una volta completato l'upload, sarà visibile sulla tab **content** del local storage
+
+![sda](img/pve-load-iso-5.png)
+
 # Creazione VM
 
 E' possbile utilizzare la WebUI per la creazione della VM
 
-Fare clik su **Create VM** in alto a destra ed inserire i parametri nella schermata
+Fare clik su **Create VM** in alto a destra ed inserire i parametri nella schermata e fare clic su **Next** a fondo schermata
 
     Inserire VM ID: 200
     Inserire Name: vm-nethservice
 
+
 ![Crea VM Step 1](img/pve-crea-vm-1.png)
+
+Selezioniamo il file **ISO** precedentemente caricato e facciamo click su **Next**
+
+![Crea VM Step 2](img/pve-crea-vm-2.png)
+
+Mettiamo il segno di spunta su : **Qemu Agent**
+
+![Crea VM Step 2](img/pve-crea-vm-3.png)
+
+Verifichiamo che **Disk size (GiB)** sia della grandezza da noi richiesta e controlliamo impostiamo seguenti parametri :
+
+    Storage: local-zfs
+    Cache: Write back
+    Discard [V]
+
+![Crea VM Step 2](img/pve-crea-vm-4.png)
+
+Assegnamo come minimo 4 core alla macchina
+
+![Crea VM Step 2](img/pve-crea-vm-5.png)
+
+Assegnamo almeno 4GB di RAM alla VM
+
+    Memory (MiB): 4096
+
+![Crea VM Step 2](img/pve-crea-vm-6.png)
+
+Rimuoviamo il segno di spunta da
+
+    Firewall [ ]
+
+![Crea VM Step 2](img/pve-crea-vm-7.png)
+
+Verifichiamo che tutti i parametri siano corretti nella sommario finale, **spuntiamo la flag**
+
+    [V] Start after created
+
+e facciamo click su **Finish**
+
+![Crea VM Step 2](img/pve-crea-vm-8.png)
+
+# Installazione NethService sulla VM
+
+Apriamo la console della VM e Procediamo all'installazione Standard di NethServer [Link alla Guida](https://nethserver.docs.nethesis.it/it/v7/installation.html)
+
+![Start Console VM](img/pve-start-vm-console-1.png)
+
+
+# Procedura Post Installazione
+
+Una volta terminata la normale installazione di NethServer, dobbiamo installare le **Qemu-Guest-Agent** da terminale di NethServer:
+
+    [root@ns ~]# yum -y install qemu-guest-agent
+
