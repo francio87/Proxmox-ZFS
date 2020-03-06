@@ -16,7 +16,7 @@ Se non avete permessi di scrittura, utilizzate **sudo**
 
 Sostituire i valori if= con il percorso corretto della iso e of= con il path corretto della USB
 
-    dd bs=1M conv=fdatasync if=./proxmox-ve_*.iso of=/dev/XYZ status=progress
+```dd bs=1M conv=fdatasync if=./proxmox-ve_*.iso of=/dev/XYZ status=progress```
 
 ### Procedura Windows
 
@@ -47,19 +47,23 @@ Selezionare **Paese** / **Timezone** / **Keyboard Layout** secondo preferenze
 
 Selezionare l'interfaccia di rete utilizzata per la gestione dell'HV
 
-    Hostname FQDN: pve.dominio.lan
-    IP: 192.168.x.x
-    Netmask: 255.255.255.0
-    GW: 192.168.x.x
-    DNS Server: 192.168.x.x
+```
+Hostname FQDN: pve.dominio.lan
+IP: 192.168.x.x
+Netmask: 255.255.255.0
+GW: 192.168.x.x
+DNS Server: 192.168.x.x
+```
 
 ![Impostazioni rete](img/pve-setup-network.png)
 
 ### Impostazione Password ed indirizzo mail
 
-    Password : Nethesis,1234
-    Confirm : Nethesis,1234
-    email : email@valida.com
+```
+Password : Nethesis,1234
+Confirm : Nethesis,1234
+email : email@valida.com
+```
 
 Nota: Proxmox di default reindirizza le email di sistema all'account specificato sopra 
 
@@ -76,22 +80,25 @@ E' possibile accedere alla WebUI per la configurazione dell'hypervisor utilizzan
 
 Effettuare l'accesso come **root** utilizzando la password impostata precedentemente, nel nostro caso **Nethesis,1234**
 
-    username: root
-    password: Nethesis,1234
+```
+username: root
+password: Nethesis,1234
+```
 
 ![Login WebUI](img/pve-login-web.png)
 
 > Nota: è possibile accedere alla macchina anche via SSH
 
-    dav@davidef ~ >> ssh root@192.168.5.29
-    Linux pve 5.3.10-1-pve #1 SMP PVE 5.3.10-1 (Thu, 14 Nov 2019 10:43:13 +0100) x86_64
-
+```
+dav@davidef ~ >> ssh root@192.168.5.29
+Linux pve 5.3.10-1-pve #1 SMP PVE 5.3.10-1 (Thu, 14 Nov 2019 10:43:13 +0100) x86_64
+```
 
 # Attivazione ?
 
 Dovremmo attivare la macchina, ottenendo una licenza ecc ecc... altrimenti non avremmo accesso ai repo stabili... Eventualmente se vogliamo usare i community posso integrare con i step da effettuare per abilitare i repo community.
 
->PVE > Subscription > Upload Key
+```PVE > Subscription > Upload Key```
 
 ![Attivazione chiave](img/pve-sub-key.png)
 
@@ -99,20 +106,22 @@ Dovremmo attivare la macchina, ottenendo una licenza ecc ecc... altrimenti non a
 
 Dopo aver attivato la licenza di Proxmox, aggiornare il sistema:
 
->PVE > Updates > Refresh > Upgrade
+```PVE > Updates > Refresh > Upgrade```
 
 Verrà aperta una shell, sulla quale è necessario immettere Y per procedere all'aggiornamento
 
->In alternativa da terminale :
+In alternativa da terminale :
 
-    # apt-get update
-    # apt-get dist-upgrade
+```
+# apt-get update
+# apt-get dist-upgrade
+```
 
 # Caricare ISO NethServer
 
 Carichiamo la ISO di NethServer all'interno di Proxmox
 
->PVE > local (pve) > Content
+```PVE > local (pve) > Content```
 
 Facciamo click su **Upload**
 
@@ -132,9 +141,10 @@ E' possbile utilizzare la WebUI per la creazione della VM
 
 Fare clik su **Create VM** in alto a destra ed inserire i parametri nella schermata e fare clic su **Next** a fondo schermata
 
-    Inserire VM ID: 200
-    Inserire Name: vm-nethservice
-
+```
+Inserire VM ID: 200
+Inserire Name: vm-nethservice
+```
 
 ![Crea VM Step 1](img/pve-crea-vm-1.png)
 
@@ -148,13 +158,19 @@ Mettiamo il segno di spunta su : **Qemu Agent**
 
 Verifichiamo che **Disk size (GiB)** sia della grandezza da noi richiesta e controlliamo impostiamo seguenti parametri :
 
-    Storage: local-zfs
-    Cache: Write back
-    Discard [V]
+```
+Storage: local-zfs
+Cache: Write back
+Discard [V]
+```
 
 ![Crea VM Step 2](img/pve-crea-vm-4.png)
 
 Assegnamo almeno 4 core alla VM
+
+```
+Cores: 4
+```
 
 ![Crea VM Step 2](img/pve-crea-vm-5.png)
 
@@ -164,15 +180,15 @@ Assegnamo almeno 4GB di RAM alla VM
 
 ![Crea VM Step 2](img/pve-crea-vm-6.png)
 
-Rimuoviamo il segno di spunta da
+Rimuoviamo il segno di spunta da:
 
-    Firewall [ ]
+```Firewall [ ]```
 
 ![Crea VM Step 2](img/pve-crea-vm-7.png)
 
 Verifichiamo che tutti i parametri siano corretti nella sommario finale, **spuntiamo la flag**
 
-    [V] Start after created
+```[V] Start after created```
 
 e facciamo click su **Finish**
 
@@ -185,14 +201,48 @@ Apriamo la console della VM e Procediamo all'installazione Standard di NethServe
 ![Start Console VM](img/pve-start-vm-console-1.png)
 
 
-# Procedura Post Installazione
+# Procedura Post Installazione Nethserver
 
 Una volta terminata la normale installazione di NethServer, dobbiamo installare le **Qemu-Guest-Agent** da terminale di NethServer:
 
-    [root@ns ~]# yum -y install qemu-guest-agent
+```[root@ns ~]# yum -y install qemu-guest-agent```
 
-# ZFS Auto Snapshot
+# Automatizzazione snapshot
 
+In questo punto bisogna valutare bene, quello che vogliamo fare... 
+è possibile automatizzare gli snapshot in 2 modi, o utilizzare le api di proxmox, con cv4pve, in sostanza installiamo un container lxc, dove all'interno mettiamo questo script che non fà altro che fare richieste api all'host, e lancia la creazione ed eliminazione degli snapshot delle vm, possiamo decidere se farlo per tutte le macchine o solo per determinate vm
+
+### o in alternativa >
+
+usiamo sanoid, che ci consente di fare lo snapshot a livello zfs, quindi senza dover utilizzare uno script che gira all'interno del container, ma direttamente sull'host con un crontab
+
+differenza sostanziale è che se uno lancia uno snapshot manuale quando utilizza sanoid, a volte per esperienza personale quando lo script fà il prune dei vecchi snapshot, va in confusione dato che il nome non rispetta il formato prefix-data-ora
+
+punto a favore per sanoid è che possiamo fare lo snapshot anche dell'intero tank dove è installato l'os quindi paradossalmente potremmo ripristinare anche l'os se magari l'aggiornamento ha danneggiato qualche componente, addirittura se non fà + il boot la macchina si entra con la usb in debug, si installa zfs tools e si fa il ripristino da live env.
+
+Da testare per quanto riguarda **sanoid** se facciamo un restore dell'intero tank, se si porta dietro anche gli snapshot della vm, ovvero io ripristino
+
+rpool-giorno-ora/
+
+## lui mi tira dietro 
+
+rpool-giorno-ora/vm100/disco-100/
+
+## Sanoid
 Per abilitare gli snapshot automatici della VM, utilizziamo [sanoid](https://github.com/jimsalterjrs/sanoid)
 
 > Nota : Posso fare la guida step by step per la configurazione dello script, ma magari se lo mettiamo in produzione, potremmo fare noi uno script standard che installa, copia il template e crea i file di cfg no ?
+
+# cv4pve-autosnap
+
+Da ricordarsi, cv4pve utilizza le api, quindi bisogna creare l'utente su proxmox, altrimenti c'è il rischio che se l'utente cambia la password di root, non abbiamo più accesso alle API
+
+```
+root@debian:~# cv4pve-autosnap --host=192.168.0.100 --username=root@pam --password=fagiano --vmid=111 clean --label='4hours' --keep=2
+----- VM 100 -----
+Remove snapshot: auto4hours190617080002
+Remove snapshot: auto4hours190617120002
+Remove snapshot: auto4hours190617160002
+Remove snapshot: auto4hours190617200002
+```
+Scarichiamo [cv4pve](https://github.com/Corsinvest/cv4pve-autosnap)
