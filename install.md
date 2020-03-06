@@ -108,7 +108,6 @@ Verrà aperta una shell, sulla quale è necessario immettere Y per procedere all
     # apt-get update
     # apt-get dist-upgrade
 
-
 # Caricare ISO NethServer
 
 Carichiamo la ISO di NethServer all'interno di Proxmox
@@ -155,7 +154,7 @@ Verifichiamo che **Disk size (GiB)** sia della grandezza da noi richiesta e cont
 
 ![Crea VM Step 2](img/pve-crea-vm-4.png)
 
-Assegnamo come minimo 4 core alla macchina
+Assegnamo almeno 4 core alla VM
 
 ![Crea VM Step 2](img/pve-crea-vm-5.png)
 
@@ -192,3 +191,8 @@ Una volta terminata la normale installazione di NethServer, dobbiamo installare 
 
     [root@ns ~]# yum -y install qemu-guest-agent
 
+# ZFS Auto Snapshot
+
+Per abilitare gli snapshot automatici della VM, utilizziamo [sanoid](https://github.com/jimsalterjrs/sanoid)
+
+> Nota : Posso fare la guida step by step per la configurazione dello script, ma magari se lo mettiamo in produzione, potremmo fare noi uno script standard che installa, copia il template e crea i file di cfg no ?
