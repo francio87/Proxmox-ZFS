@@ -153,6 +153,13 @@ Possiamo riavviare via interfaccia grafica di **Proxmox**
 root@pve:~# reboot
  ```
 
+
+# DA SPLITTARE
+# SU UN ALTRA GUIDA
+# IL CLUSTER DEVE ESSERE CREATO
+# PRIMA DI CREARE UNA NUOVA VM
+
+
 # Caricare ISO NethServer
 
 Carichiamo la ISO di NethServer all'interno di Proxmox
@@ -258,13 +265,32 @@ pve > 200 (vm-nethservice) > Console
 
 # Procedura Post Installazione Nethserver
 
+## Installazione Guest Agent
+
 Una volta terminata la normale installazione di NethServer, dobbiamo installare le **Qemu-Guest-Agent** da terminale di NethServer:
 
 ```
 [root@ns ~]# yum -y install qemu-guest-agent
 ```
 
+## Rimozione Disco Installazione
+
+Dopo la corretta installazione di NethServer, rimuovere la ISO dalla VM.
+
+```
+pve > 200 (vm-nethservice) > Hardware > CD/DVD Drive > Edit > Do not use any media
+```
+![Start Console VM](img/pve-crea-vm-9.png)
+
+
+
+
+
+
+
 # Automatizzazione snapshot
+# da decidere
+# come muoversi
 
 In questo punto bisogna valutare bene, quello che vogliamo fare... 
 è possibile automatizzare gli snapshot in 2 modi, o utilizzare le api di proxmox, con cv4pve, in sostanza installiamo un container lxc, dove all'interno mettiamo questo script che non fà altro che fare richieste api all'host, e lancia la creazione ed eliminazione degli snapshot delle vm, possiamo decidere se farlo per tutte le macchine o solo per determinate vm
