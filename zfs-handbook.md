@@ -49,6 +49,13 @@ Al termine del processo rilanciando il comando 'zpool status' avremo il resocont
 
     scan: scrub repaired 0B in 0 days 00:00:08 with 0 errors on Thu Mar  5 12:37:54 2020
 
+## Lista snapshot ZFS disponibili
+
+```root@pve:~# zfs list -t snapshot 
+NAME                                  USED  AVAIL     REFER  MOUNTPOINT
+rpool/data/vm-200-disk-0@preInstall     0B      -     1.70G  -
+```
+
 
 # ZFS Troubleshooting
 
