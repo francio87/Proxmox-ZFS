@@ -39,29 +39,30 @@ Accedere alla WebUI del primo host e portarsi su:
 
 ![pve cluster1](img/pve-cluster-1.png)
 
-Sul primo nodo, fare click su "**Create Cluster**" immettere un "**Cluster Name**" e Selezioniamo l'interfaccia bridge su "**Link 0**":
+Sul primo nodo, fare click su ```Create Cluster``` immettere un ```Cluster Name``` e Selezioniamo l'interfaccia bridge su ```Link 0```:
 
 ![pve cluster2](img/pve-cluster-2.png)
 ![pve cluster3](img/pve-cluster-3.png)
 
-Se la procedura è andata a buon fine, avremmo un **TASK OK**
+Se la procedura è andata a buon fine, avremmo un ```TASK OK```
 
 ![pve cluster1](img/pve-cluster-4.png)
 
-Facciamo click su Join Information e su Copy information
+Facciamo click su ```Join Information``` e su ```Copy information```
+
 ![pve cluster1](img/pve-cluster-5.png)
 
 ## Operazioni sul nodo 2 (pve2)
 
-Accediamo alla WebGui del secondo nodo e spostiamoci su:
+Accediamo alla **WebGui** del **secondo nodo** e spostiamoci su:
 
 ```Datacenter > Cluster > Join Cluster```
 
-Incolliamo all'interno di "**information**" il contenuto copiato in precedenza, selezioniamo l'interfaccia su "**Link 0**" ed inseriamo la password di root del secondo nodo.
+Incolliamo all'interno di ```information``` il contenuto copiato in precedenza, selezioniamo l'interfaccia su ```Link 0``` ed inseriamo la password di root.
 
 ![pve cluster1](img/pve-cluster-6.png)
 
-Se il join al cluster è andato a buon fine vedremo sulla Dashboard entrambi i server, con il relativo status:
+Se il join al cluster è andato a buon fine vedremo sulla ```Dashboard``` entrambi i server, con il relativo status:
 
 ![pve cluster](img/pve-cluster-status-ok.png)
 
