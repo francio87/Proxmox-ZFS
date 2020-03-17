@@ -29,7 +29,7 @@ Inserire Name: vm-nethservice
 
 ![Crea VM Step 1](img/pve-crea-vm-1.png)
 
-Selezioniamo il file ```ISO``` precedentemente caricato e facciamo click su ```Next``
+Selezioniamo il file ```ISO``` precedentemente caricato e facciamo click su ``Next``
 
 ![Crea VM Step 2](img/pve-crea-vm-2.png)
 
@@ -39,23 +39,24 @@ Mettiamo il segno di spunta su : ```Qemu Agent```
 
 ![Crea VM Step 2](img/pve-crea-vm-3.png)
 
-Verifichiamo che ```Disk size (GiB)``` sia della grandezza da noi richiesta e controlliamo impostiamo seguenti parametri :
+Verifichiamo che ```Disk size (GiB)``` sia della grandezza necessaria e impostiamo i  seguenti parametri :
 
 ```
-Storage : local-zfs
-Cache   : Write back
-Discard : [V]
+Storage          : local-zfs
+Cache            : Write back
+Discard          : [V]
+Disk size: (GiB) : xxx
 ```
 
 ![Crea VM Step 2](img/pve-crea-vm-4.png)
 
-Assegnamo almeno 4 core alla VM
+Assegnamo i core necessari alla macchina, variando in base al caricodi lavoro che andrà a sopportare
 
 ```Cores: 4```
 
 ![Crea VM Step 2](img/pve-crea-vm-5.png)
 
-Assegnamo almeno 4GB di RAM alla VM
+Assegnamo la quantità di RAM alla macchina (Multipli di 1024)
 
 ```Memory (MiB): 4096```
 
