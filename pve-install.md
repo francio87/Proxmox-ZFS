@@ -16,7 +16,7 @@ Se non avete permessi di scrittura, utilizzate **sudo**
 
 Sostituire i valori if="" con il percorso corretto della iso e of="" con il path corretto della USB
 
-```dd bs=1M conv=fdatasync if=/path/to/iso/proxmox-ve_*.iso of=/dev/XYZ status=progress```
+```dd bs=1M conv=fdatasync if=/path/to/iso/proxmox-ve_*.iso of=/dev/XYZ```
 
 Esempio
 
