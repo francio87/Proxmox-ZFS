@@ -29,8 +29,7 @@ dav@davidef  ~: sudo dd bs=1M conv=fdatasync if=/home/dav/Scaricati/proxmox-ve_6
 
 ### Procedura Windows
 
-Utilizzare [BalenaEtcher](https://www.balena.io/etcher/) oppure [Rufus](https://rufus.ie/)
-> Rufus non testato personalmente
+Utilizzare [BalenaEtcher](https://www.balena.io/etcher/)
 
 
 ## Installazione
@@ -170,6 +169,6 @@ Possiamo riavviare via interfaccia grafica di **Proxmox**
 
 ## Installazione secondo nodo
 
-Procedere con l'installazione del secondo Hypervisor, ed effettuare il join al cluster
+Procedere con l'installazione del secondo nodo ed effettuare il join al cluster.
 
-La guida è disponibile [Qui](replica-pve.md)
+La guida è disponibile [Qui](join-cluster.md)
