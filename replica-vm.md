@@ -44,7 +44,3 @@ Ovviamente maggiore è la quantità dei dati scritti tra un sync e l'altro, magg
 2020-03-10 10:00:03 200-0: (remote_finalize_local_job) delete stale replication snapshot '__replicate_200-0_1583823600__' on local-zfs:vm-200-disk-0
 2020-03-10 10:00:03 200-0: end replication job
 ```
-
-## Preparazione VM Standby sul nodo 2
-
-Possiamo ora preparare la [VM sul secondo nodo](vm-standby.md)

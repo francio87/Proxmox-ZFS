@@ -8,10 +8,16 @@ Step 3. [Installazione VM](vm-install.md)
 
 Step 4. [Abilita Replica](replica-pve.md)
 
-Step 5. [Preparazione VM PVE2](vm-pve2.md)
+### Disaster recovery
+
+In caso di problemi sul nodo primario :
+
+[Avvio VM su nodo2](disaster-recovery.md)
 
 
-    // da terminare
+### Utilità
+
+> da terminare
 
 [ZFS Handbook](zfs-handbook.md)
 
