@@ -1,36 +1,48 @@
-
-
-## Preparazione macchina in Stand-By sul secondo nodo
-
-La replica sul secondo nodo avviene solo a livello storage, la [wiki di Proxmox](https://pve.proxmox.com/wiki/Storage_Replication#_error_handling), raccomanda la copia dei cfg della VM sul secondo nodo solo se si verificano problemi al primo, probabilmente per evitare l'avvio della VM per sbaglio dal secondo nodo ( in caso si avviasse la macchina ci sarebbe un incongruenza dei dati).
-
-     // da terminare o integrare dopo i test in laboratorio
-     quindi ora dobbiamo preparare una macchina sul secondo nodo, in modo che sia pronta all'avvio in caso il primo nodo vada offline.
-
-## Da verificare con test in laboratorio
-
-Copiamo la configurazione della VM (```pve```) al nodo secondario (```pve2```)
-Grazie a corosync, i file di configurazione delle VM del primo nodo dovrebbero essere comunque accessibili, anche se il nodo non risponde:
+# Script opt zfs
 
 ```
-root@pve:cat /etc/pve/nodes/pve/qemu-server/200.conf
-agent: 1
-bootdisk: scsi0
-cores: 4
-ide2: none,media=cdrom
-memory: 4096
-name: vm-nethservice
-net0: virtio=92:C7:17:60:3E:68,bridge=vmbr0
-numa: 0
-ostype: l26
-scsi0: local-zfs:vm-200-disk-0,cache=writeback,discard=on,size=32G
-scsihw: virtio-scsi-pci
-smbios1: uuid=064fa99f-f5a3-4f95-bbea-1b8770307ea9
-sockets: 1
-vmgenid: e45eee04-142e-4c16-bc23-f007104194a0
+#!/usr/bin/env bash
+
+## based on https://github.com/extremeshok/xshok-proxmox/blob/master/install-post.sh
+
+
+## Optimise ZFS arc size
+if [ "$(command -v zfs)" != "" ] ; then
+  RAM_SIZE_GB=$(( $(vmstat -s | grep -i "total memory" | xargs | cut -d" " -f 1) / 1024 / 1000))
+  if [[ RAM_SIZE_GB -lt 16 ]] ; then
+    # 1GB/1GB
+    MY_ZFS_ARC_MIN=1073741824
+    MY_ZFS_ARC_MAX=1073741824
+  else
+    MY_ZFS_ARC_MIN=$((RAM_SIZE_GB * 1073741824 / 16))
+    MY_ZFS_ARC_MAX=$((RAM_SIZE_GB * 1073741824 / 8))
+  fi
+  # Enforce the minimum, incase of a faulty vmstat
+  if [[ MY_ZFS_ARC_MIN -lt 1073741824 ]] ; then
+    MY_ZFS_ARC_MIN=1073741824
+  fi
+  if [[ MY_ZFS_ARC_MAX -lt 1073741824 ]] ; then
+    MY_ZFS_ARC_MAX=1073741824
+  fi
+  cat <<EOF > /etc/modprobe.d/zfs.conf
+# eXtremeSHOK.com ZFS tuning
+# Use 1/16 RAM for MAX cache, 1/8 RAM for MIN cache, or 1GB
+options zfs zfs_arc_min=$MY_ZFS_ARC_MIN
+options zfs zfs_arc_max=$MY_ZFS_ARC_MAX
+# use the prefetch method
+options zfs l2arc_noprefetch=0
+# max write speed to l2arc
+# tradeoff between write/read and durability of ssd (?)
+# default : 8 * 1024 * 1024
+# setting here : 500 * 1024 * 1024
+options zfs l2arc_write_max=524288000
+EOF
+fi
+
+# propagate the setting into the kernel
+update-initramfs -u -k all
+
 ```
-
-
 
 
 

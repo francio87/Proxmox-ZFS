@@ -12,7 +12,7 @@ Step 4. [Abilita Replica](replica-pve.md)
 
 In caso di problemi sul nodo primario :
 
-[Avvio VM su nodo2](disaster-recovery.md)
+[Avvio VM su nodo2](dr-vm-nodo2.md)
 
 
 ### Utilità
