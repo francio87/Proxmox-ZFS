@@ -6,7 +6,7 @@ Step 2. [Join Cluster](join-cluster.md)
 
 Step 3. [Installazione VM](vm-install.md)
 
-Step 4. [Abilita Replica](replica-pve.md)
+Step 4. [Abilita Replica](replica-vm.md)
 
 ### Disaster recovery
 
