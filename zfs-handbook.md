@@ -88,7 +88,11 @@ root@px01:~#
 
 Il rollback, se non presenta messaggi di errore è stato completato correttamente.
 
+Possiamo verificare con `zfs list -t snapshot` che l'ultimo snapshot disponibile è il corrente:
 
+```
+ZFS-SAS/VHD/vm-950-disk-0@ready                                 11.6K      -     2.74G  -
+```
 
 # ZFS Troubleshooting
 
