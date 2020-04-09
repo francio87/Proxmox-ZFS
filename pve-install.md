@@ -31,8 +31,6 @@ dav@davidef  ~: sudo dd bs=1M conv=fdatasync if=/home/dav/Scaricati/proxmox-ve_6
 
 Utilizzare [BalenaEtcher](https://www.balena.io/etcher/)
 
-testo [quello che voglio visualizzare](http://iol.it)
-
 ## Installazione
 
 Avviare l'installazione dal supporto creato, selezionare **"Install Proxmox VE"**
