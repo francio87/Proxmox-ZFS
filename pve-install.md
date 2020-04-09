@@ -18,7 +18,7 @@ Sostituire i valori if="" con il percorso corretto della iso e of="" con il path
 
 ```dd bs=1M conv=fdatasync if=/path/to/iso/proxmox-ve_*.iso of=/dev/XYZ```
 
-Esempio
+## Esempio
 
 ```
 dav@davidef  ~: sudo dd bs=1M conv=fdatasync if=/home/dav/Scaricati/proxmox-ve_6.1-1.iso of=/dev/sdb
@@ -31,6 +31,7 @@ dav@davidef  ~: sudo dd bs=1M conv=fdatasync if=/home/dav/Scaricati/proxmox-ve_6
 
 Utilizzare [BalenaEtcher](https://www.balena.io/etcher/)
 
+testo [quello che voglio visualizzare](http://iol.it)
 
 ## Installazione
 

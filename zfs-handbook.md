@@ -51,18 +51,51 @@ Al termine del processo rilanciando il comando 'zpool status' avremo il resocont
 
 ## Lista snapshot ZFS disponibili
 
-```root@pve:~# zfs list -t snapshot 
+```
+root@pve:~# zfs list -t snapshot 
 NAME                                  USED  AVAIL     REFER  MOUNTPOINT
 rpool/data/vm-200-disk-0@preInstall     0B      -     1.70G  -
 ```
 
+## Rollback snapshot
+
+Se si tenta di ripristinare uno snapshot precentemente creato da interfaccia grafica di proxmox, comprare un errore `can't rollback more recent snapshot exist`
+
+Se abbiamo attivato gli snapshot automatici temporizzati di zfs, da GUI di Proxmox, non possiamo ripristinare ad una versione precedente.
+
+![Rollaback Snapshot](img/snapshot-rollback-gui.png)
+![Rollaback Snapshot Error](img/snapshot-rollback-gui-error.png)
+
+Per eseguire il rollback ad uno snapshot precedentemente creato, verificare gli snapshot disponibili con il comando `zfs list -t snapshot` e sucessivamente ripristinarlo con il comando `zfs rollback path/tank/vm-id-disk.0@nomesnap`
+
+### Attenzione!
+
+> eseguendo un rollback di uno snapshot, gli snapshot intermedi verranno PERSI! ad esempio se ripristino uno snapshot di 5 giorni fà, gli snapshot di ieri saranno irrecuperabili
+
+```
+root@px01:~# zfs rollback ZFS-SAS/VHD/vm-950-disk-0@ready 
+cannot rollback to 'ZFS-SAS/VHD/vm-950-disk-0@ready': more recent snapshots or bookmarks exist
+use '-r' to force deletion of the following snapshots and bookmarks:
+ZFS-SAS/VHD/vm-950-disk-0@autosnap_2020-04-09_00:00:02_daily
+```
+
+ZFS ci avvisa che esistono snapshot più recenti a quello che vogliamo ripristinare, forzando con l'opzione -r elimineremo tutti gli snapshot intermedi (la vm non deve essere in esecuzione)
+
+```
+root@px01:~# zfs rollback -r ZFS-SAS/VHD/vm-950-disk-0@ready 
+root@px01:~# 
+```
+
+Il rollback, se non presenta messaggi di errore è stato completato correttamente.
+
+
 
 # ZFS Troubleshooting
 
-## Possibili problemi riscontrati su Proxmox
+## Problemi Noti ZFS
 
-Il sistema non si avvia e mostra un cursore lampeggiante
-
+### Il sistema non si avvia e mostra un cursore lampeggiante
+Potrebbe verificarsi
 
 
 Symptoms: stuck at boot with an blinking prompt.

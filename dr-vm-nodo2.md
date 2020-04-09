@@ -1,6 +1,6 @@
 # Avvio della VM su PVE2
 
-La replica sul secondo nodo avviene solo a livello storage, la [wiki di Proxmox](https://pve.proxmox.com/wiki/Storage_Replication#_error_handling), raccomanda la copia dei cfg della VM sul secondo nodo solo se si verificano problemi al primo, per evitare l'avvio della VM per sbaglio dal secondo nodo ( in caso si avviasse la macchina ci sarebbe un incongruenza dei dati).
+La replica sul secondo nodo avviene solo a livello storage, la [wiki di Proxmox](https://pve.proxmox.com/wiki/Storage_Replication#_error_handling), raccomanda la copia dei cfg della VM sul secondo nodo solo se si verificano problemi al primo, per evitare l'avvio della VM per sbaglio dal secondo nodo ( in caso si avviasse la macchina, ci sarebbe un incongruenza dei dati).
 
 ## Avviare la macchina solo ed esclusivamente ci fossero problemi con il primo nodo (PVE)
 
@@ -45,7 +45,7 @@ Membership information
 
 Nell'esempio sopra riportato abbiamo simulato la perdita del primo nodo.
 
-Forziamo il quorum sul secondo nodo per poter operare e avviare la macchina sullo stesso, da ssh diamo il comando ```pvecm expected 1```
+Forziamo il quorum sul secondo nodo per poter operare e avviare la macchina sullo stesso, da terminale diamo il comando ```pvecm expected 1```
 
 ```
 root@pve2:~# pvecm expected 1
