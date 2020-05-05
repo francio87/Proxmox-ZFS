@@ -4,6 +4,16 @@
 
 Carichiamo la ISO di NethServer all'interno di Proxmox
 
+E' possibile farlo da WebUI o da terminale:
+
+- Terminale, entriamo via ssh, ci portiamo sulla cartella ```/var/lib/vz/template/iso``` e usiamo ```wget``` per scaricare il file iso
+```
+root@px01:~# cd /var/lib/vz/template/iso
+root@px01:/var/lib/vz/template/iso# wget http://sito.ext/cd.iso
+```
+
+- Interfaccia Web
+
 ```PVE > local (pve) > Content > Upload```
 
 ![Click Upload](img/pve-load-iso-1.png)
