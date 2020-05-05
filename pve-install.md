@@ -4,6 +4,9 @@ Procedura installazione **Proxmox** con **RAID1 ZFS**
 
 Nota: Proxmox non supporta [mdraid](https://pve.proxmox.com/wiki/Software_RAID) per garantire la ridondanza dei dati si consiglia l'uso di **ZFS**
 
+## ZFS e Controller Raid Hardware
+**ZFS** necessità dell'accesso diretto ai dischi, quindi se sulla macchina è presente un controller raid dedicato, è necessario impostarlo in modalità HBA.
+In alternativa se la macchina è equipaggiata con un controller Raid decente (con Cache e Battery Backup), sarebbe più corretta l'installazione standard **senza ZFS** e utilizzare le funzionalità Raid del controller.
 
 ## Preparazione media installazione
 
