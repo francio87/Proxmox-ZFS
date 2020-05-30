@@ -19,6 +19,8 @@ In caso di problemi sul nodo primario :
 
 > da terminare
 
+[Auto-SnapShot](auto-snapshot.md)
+
 [ZFS Handbook](zfs-handbook.md)
 
 [Comandi da terminale](cfg-term.md)
