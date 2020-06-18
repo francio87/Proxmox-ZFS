@@ -10,7 +10,7 @@ autostart
 
 bound schede1+2
 
-
+/***************************************/
 
 
 
@@ -24,6 +24,8 @@ bridge port : bond0
 
 
 
+--------------------
 
+creare utente backup, creare gruppi . permessi aggiungere
 
 
