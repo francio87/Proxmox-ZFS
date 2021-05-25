@@ -60,11 +60,13 @@ Disk size: (GiB) : xxx
 
 ![Crea VM Step 2](img/pve-crea-vm-4.png)
 
-Assegnamo i core necessari alla macchina, variando in base al caricodi lavoro che andrà a sopportare
+Assegnamo i core necessari alla macchina, variando in base al carico di lavoro che andrà a sopportare, importante modificare il parametro `Type`, impostandolo su `Host`
 
-```Cores: 4```
+``Cores: 4``
 
-![Crea VM Step 2](img/pve-crea-vm-5.png)
+``Type: Host``
+
+![Crea VM Step 2](img/pve-crea-vm-5-2.png)
 
 Assegnamo la quantità di RAM alla macchina (Multipli di 1024)
 
