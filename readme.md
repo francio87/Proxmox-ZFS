@@ -1,4 +1,4 @@
-# Proxmox Nethesis
+# Proxmox
 
 Step 1. [Installazione Proxmox](pve-install.md)
 
