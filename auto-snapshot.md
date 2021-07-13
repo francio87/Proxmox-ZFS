@@ -33,3 +33,11 @@ mv cv4pve-autosnap /usr/local/bin/
    29  crontab -l
    30  /usr/local/bin/cv4pve-autosnap --host=localhost --username=nsbackup@pve --password="pass,word1111" --vmid="all" snap --label='daily' --keep=10
 ``
+
+
+
+
+root@pve-02:~# cat /etc/cron.d/zfs-autosnap
+#45 13 * * * root /usr/local/bin/cv4pve-autosnap --host=localhost --username="nsbackup@pve" --password="lapassword" --vmid="all" snap --label='daily' --keep=14 >> /tmp/zfs-autosnap.log
+#10 21 * * * root /usr/local/bin/cv4pve-autosnap --host=localhost --username="nsbackup@pve" --password="lapassword" --vmid="all" snap --label='daily' --keep=14 >> /tmp/zfs-autosnap.log
+10 21 * * * root /usr/local/bin/cv4pve-autosnap --host=localhost --username="nsbackup@pve" --password="lapassword" --vmid="all" snap --label='daily' --keep=7 >> /tmp/zfs-autosnap.log
