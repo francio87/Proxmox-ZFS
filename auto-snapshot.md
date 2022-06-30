@@ -4,7 +4,7 @@ Seguire le indicazioni disponibili in questo [repo](https://github.com/francio87
 
 
 
-## Appunti sparsi
+## Appunti sparsi - NON SEGUIRE
 
 ### Crontab:
 
