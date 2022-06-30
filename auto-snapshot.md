@@ -1,5 +1,11 @@
 # Automatizzazione Snapshot
 
+Seguire le indicazioni disponibili in questo [repo](https://github.com/francio87/ansible-proxmox), per automatizzare l'installazione attraverso Ansible
+
+
+
+## Appunti sparsi
+
 ### Crontab:
 
 ```
