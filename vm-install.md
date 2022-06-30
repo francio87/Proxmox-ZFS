@@ -118,6 +118,15 @@ Una volta terminata la normale installazione di NethServer, dobbiamo installare 
 
 ```[root@ns ~]# yum -y install qemu-guest-agent```
 
+## Abilitare FSTRIM
+
+Abilitiamo **fstrim.timer** in modo che il sistema svuotare i blocchi eliminati su disco, da terminale della VM NethServer:
+
+```
+systemctl enable fstrim.timer
+systemctl start fstrim.timer
+```
+
 
 ## Abilitare Replica VM sul secondo nodo (PVE2)
 
